@@ -1,0 +1,24 @@
+{
+  "name": "daily-formatter",
+  "version": "1.0.0",
+  "description": "Quick formatter to help daily meetings",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"lint": "tslint 'src/**/*.ts'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theleoni/daily-formatter.git"
+  },
+  "author": "Guilherme Leoni <guilherme_leoni@outlook.com>",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/theleoni/daily-formatter/issues"
+  },
+  "homepage": "https://github.com/theleoni/daily-formatter#readme",
+  "devDependencies": {
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.5"
+  }
+}
