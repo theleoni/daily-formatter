@@ -2,10 +2,10 @@
 'use strict';
 
 var fs = require('fs');
-var path = require('path');
+// var path = require('path');
 var xmlReader = require('read-xml');
 var xmlParser = require('fast-xml-parser');
-var he = require('he');
+// var he = require('he');
 // var logger = require('morgan');
 
 var index = require(__dirname + '/dist/index');

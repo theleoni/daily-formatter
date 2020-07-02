@@ -9,20 +9,36 @@ export const FORMATTER =
 
 	const preambleItem: number = (formatter.preamble && formatter.preamble.length) || 0;
 	const preambleItemDone: number = (formatter.preamble && formatter.preamble.filter((preamble: Preamble) => preamble.status).length) || 0;
-	const progress: number = (preambleItemDone * 100) / preambleItem;
+	const progressValue: number = Math.round((preambleItemDone * 100) / preambleItem);
+
+	// variables to style
+	const id = formatter.id ? `${formatter.id} | ` : '';
+	const description = formatter.description;
+	const status = CONSTS_FORMATTER(formatter.status, 'STATUS');
+	const type = CONSTS_FORMATTER(formatter.type, 'TIPO', true);
+	const components = CONSTS_FORMATTER(formatter.components, 'COMPONENTES', true);
+	const publicationVersion = CONSTS_FORMATTER(formatter.publicationVersion, 'VERSÃO', true);
+	const progress = PROGRESS_BAR_FORMATTER(progressValue);
+
+	const identation2 = MARKDOWN.identation.repeat(2);
+	const identation4 = MARKDOWN.identation.repeat(2);
+	const breakLine = MARKDOWN.breakLine;
+	const item = MARKDOWN.item;
+	const preambleDone = MARKDOWN.preambleDone;
+	const preambleOpen = MARKDOWN.preambleOpen;
 
 	return (
-		`${formatter.id ? `${formatter.id} | ` : ''}${formatter.description}${MARKDOWN.breakLine}` +
-		`${CONSTS_FORMATTER(formatter.status, 'STATUS')}${CONSTS_FORMATTER(formatter.type, 'TIPO', true)}${CONSTS_FORMATTER(formatter.components, 'COMPONENTES', true)}${MARKDOWN.breakLine}` +
-		`${PROGRESS_BAR_FORMATTER(progress)}${MARKDOWN.breakLine}` +
-		`${(formatter.preamble && formatter.preamble.map(
-			(preamble: Preamble) => `${MARKDOWN.identation.repeat(4)}${MARKDOWN.item} ${preamble.description} | ${preamble.status ? MARKDOWN.preambleDone : MARKDOWN.preambleOpen}${MARKDOWN.breakLine}`
-		).join('')) || ''}${MARKDOWN.breakLine}` +
-		`${MARKDOWN.identation.repeat(2)}${(formatter.obstacle && formatter.obstacle.length > 0 && (
-			`! IMPEDIMENTOS:${MARKDOWN.breakLine}` +
+		`${id}${description}${breakLine}` +
+		`${identation2}${status}${type}${components}${publicationVersion}${breakLine}` +
+		`${identation2}${progress}${breakLine}` +
+		`${(formatter.preamble && formatter.preamble.length > 0 && formatter.preamble.map(
+			(preamble: Preamble) => `${identation4}${item} ${preamble.description} | ${preamble.status ? preambleDone : preambleOpen}${breakLine}`
+		).join('')) || ''}${breakLine}` +
+		`${identation2}${(formatter.obstacle && formatter.obstacle.length > 0 && (
+			`! IMPEDIMENTOS:${breakLine}` +
 			formatter.obstacle.map(
-				(obstacle: string) => `${MARKDOWN.identation.repeat(4)}${MARKDOWN.item} ${obstacle}${MARKDOWN.breakLine}`
+				(obstacle: string) => `${identation4}${item} ${obstacle}${breakLine}`
 			).join('')
-		)) || ` Sem impedimentos`}${MARKDOWN.breakLine}`
+		)) || `Sem impedimentos`}${breakLine}`
 	);
 };

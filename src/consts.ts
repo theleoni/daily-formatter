@@ -47,11 +47,9 @@ export const CODE_PREFIX = {
 export interface Formatter {
 	id?: string;
 	description: string;
-	// type: Types;
-	// components: Components[];
-	// status?: Status,
 	type: string;
 	components: string | string[];
+	publicationVersion?: string,
 	status?: string,
 	preamble?: Preamble[],
 	obstacle?: string[],

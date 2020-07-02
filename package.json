@@ -9,7 +9,8 @@
 		"build": "rimraf dist/* && npm run lint && tsc",
 		"build-dev": "rimraf dist/* && tsc -w",
 		"start": "node app.js",
-		"build-start": "npm run build && node app.js"
+		"build-start": "npm run build && node app.js",
+		"clean-xml": "rimraf xml/*"
 	},
 	"repository": {
 		"type": "git",

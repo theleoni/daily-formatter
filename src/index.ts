@@ -6,6 +6,9 @@ import { HTMLElement, parse } from 'node-html-parser';
 
 export default (jsonObj: any) => {
 
+	const customFiledPublication = jsonObj.rss.channel.item.customfields.customfield.filter((e: any) => e.customfieldname === 'Versão Publicação');
+	const publicationVersion = customFiledPublication && customFiledPublication.length > 0 ? customFiledPublication[0].customfieldvalues.label : null;
+
 	const comments: HTMLElement =
 	parse(
 		jsonObj.rss.channel.item.comments.comment
@@ -51,6 +54,7 @@ export default (jsonObj: any) => {
 		type: jsonObj.rss.channel.item.priority,
 		components: jsonObj.rss.channel.item.component,
 		status: jsonObj.rss.channel.item.status,
+		publicationVersion,
 		preamble,
 		obstacle,
 	};
