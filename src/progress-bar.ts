@@ -1,7 +1,7 @@
 
 import { EXTRA_SPACE_FORMATTER } from './consts';
 
-const SIZE: number = 40; // 73
+const SIZE: number = 56; // 73
 const TYPE_DONE: string = '#';
 const TYPE_LEFT: string = '.';
 

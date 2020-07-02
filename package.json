@@ -1,24 +1,42 @@
 {
-  "name": "daily-formatter",
-  "version": "1.0.0",
-  "description": "Quick formatter to help daily meetings",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-		"lint": "tslint 'src/**/*.ts'"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/theleoni/daily-formatter.git"
-  },
-  "author": "Guilherme Leoni <guilherme_leoni@outlook.com>",
-  "license": "GPL-3.0-only",
-  "bugs": {
-    "url": "https://github.com/theleoni/daily-formatter/issues"
-  },
-  "homepage": "https://github.com/theleoni/daily-formatter#readme",
-  "devDependencies": {
-    "tslint": "^6.1.2",
-    "typescript": "^3.9.5"
-  }
+	"name": "daily-formatter",
+	"version": "1.0.0",
+	"description": "Quick formatter to help daily meetings",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"lint": "tslint 'src/**/*.ts'",
+		"build": "rimraf dist/* && npm run lint && tsc",
+		"build-dev": "rimraf dist/* && tsc -w",
+		"start": "node app.js",
+		"build-start": "npm run build && node app.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/theleoni/daily-formatter.git"
+	},
+	"author": "Guilherme Leoni <guilherme_leoni@outlook.com>",
+	"license": "GPL-3.0-only",
+	"bugs": {
+		"url": "https://github.com/theleoni/daily-formatter/issues"
+	},
+	"engines": {
+		"node": ">=12"
+	},
+	"homepage": "https://github.com/theleoni/daily-formatter#readme",
+	"dependencies": {
+		"@types/he": "^1.1.1",
+		"@types/node": "^14.0.14",
+		"fast-xml-parser": "^3.17.4",
+		"he": "^1.2.0",
+		"morgan": "~1.9.1",
+		"node-html-parser": "^1.2.20",
+		"npm": "^6.14.5",
+		"read-xml": "^3.0.0"
+	},
+	"devDependencies": {
+		"rimraf": "^3.0.2",
+		"tslint": "^6.1.2",
+		"typescript": "^3.9.5"
+	}
 }
