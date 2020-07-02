@@ -19,31 +19,6 @@ export const CODE_PREFIX = {
 	preambleCheck: 'v',
 }
 
-// export enum Types {
-// 	EXPRESSO = 'EXPRESSO',
-// 	NORMAL = 'NORMAL',
-// 	FASTPASS = 'FASTPASS',
-// 	PROJETO = 'PROJETO',
-// 	ERRO = 'ERRO',
-// };
-//
-// export enum Components {
-// 	PWA = 'PWA',
-// 	ADMCLI = 'ADMCLI',
-// 	API = 'API',
-// 	ECOS = 'ECOS',
-// 	GTM = 'GTM',
-// 	SPLAN = 'SPLAN',
-// };
-//
-// export enum Status {
-// 	ANALISE = 'ANÁLISE',
-// 	DESENVOLVENDO = 'DESENVOLVENDO',
-// 	MERGE = 'MERGE',
-// 	TESTE = 'TESTE',
-// 	CONCLUIDO = 'CONCLUÍDO',
-// };
-
 export interface Formatter {
 	id?: string;
 	description: string;
@@ -74,7 +49,6 @@ export const PREFIX_FORMATTER =
 
 export const CONSTS_FORMATTER =
 (toFormat: string | string[] | undefined, prefix?: string, addExtraSpace?: boolean): string => {
-// (toFormat: Status | Types | Components[], prefix?: string, addExtraSpace?: boolean): string => {
 
 	if (!toFormat) return '';
 
