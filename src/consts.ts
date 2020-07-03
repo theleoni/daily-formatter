@@ -17,6 +17,7 @@ export const CODE_PREFIX = {
 	obstacleCode: 'code-ada',
 	preambleSeparator: '|',
 	preambleCheck: 'v',
+	preambleCheckAccent: 'vv',
 }
 
 export interface Formatter {
@@ -33,6 +34,7 @@ export interface Formatter {
 export interface Preamble {
 	description: string,
 	status: boolean,
+	accent: boolean,
 }
 
 export const EXTRA_SPACE_FORMATTER =

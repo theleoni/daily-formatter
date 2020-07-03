@@ -1,15 +1,13 @@
 {
 	"name": "daily-formatter",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Quick formatter to help daily meetings",
 	"main": "app.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"lint": "tslint 'src/**/*.ts'",
+		"lint": "tslint --fix 'src/**/*.ts'",
 		"build": "rimraf dist/* && npm run lint && tsc",
 		"build-dev": "rimraf dist/* && tsc -w",
-		"start": "node app.js",
-		"build-start": "npm run build && node app.js",
+		"start": "rimraf dist/* && tsc && node app.js",
 		"clean-xml": "rimraf xml/*"
 	},
 	"repository": {

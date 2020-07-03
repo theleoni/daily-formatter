@@ -28,7 +28,11 @@ export const FORMATTER =
 	const progress: string = PROGRESS_BAR_FORMATTER(progressValue);
 	const preamble: string = formatter.preamble && formatter.preamble.length > 0
 	? formatter.preamble.map(
-		(insidePreamble: Preamble) => `${identation4}${item} ${insidePreamble.description} | ${insidePreamble.status ? preambleDone : preambleOpen}${breakLine}`
+		(insidePreamble: Preamble) => {
+			const readyPreamble = `${identation4}${item} ${insidePreamble.description} | ${insidePreamble.status ? preambleDone : preambleOpen}`;
+			const bolder = insidePreamble.accent ? MARKDOWN.bold : '';
+			return `${bolder}${readyPreamble}${bolder}${breakLine}`;
+		}
 	).join('')
 	: '';
 	const obstacle: string = formatter.obstacle && formatter.obstacle.length > 0
@@ -40,7 +44,7 @@ export const FORMATTER =
 	: `Sem impedimentos`;
 
 	return (
-		`${id}${description}${breakLine}` +
+		`${MARKDOWN.bold}${id}${description}${MARKDOWN.bold}${breakLine}` +
 		`${identation2}${status}${type}${components}${publicationVersion}${breakLine}` +
 		`${identation2}${progress}${breakLine}` +
 		`${preamble}${breakLine}` +

@@ -32,9 +32,20 @@ export default (jsonObj: any) => {
 		.reduce((acc, val) => acc.concat(val), [])
 		.map((e: string): Preamble => {
 			const prePreable: string[] = e.split(CODE_PREFIX.preambleSeparator).map(e2 => e2.trim());
+			const description = prePreable[0];
+			const status = prePreable[1] && prePreable[1].toLowerCase();
 			return {
-				description: prePreable[0],
-				status: (prePreable[1] && prePreable[1].toLowerCase() === CODE_PREFIX.preambleCheck) || false,
+				description,
+				status: (
+					status
+					&& (
+						status === CODE_PREFIX.preambleCheck
+						|| status === CODE_PREFIX.preambleCheckAccent
+					)
+				) || false,
+				accent: (
+					status && status === CODE_PREFIX.preambleCheckAccent
+				) || false,
 			}
 		})
 	);
