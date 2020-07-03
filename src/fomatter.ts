@@ -1,8 +1,12 @@
 
 'use strict';
 
-import { Formatter, Preamble, CONSTS_FORMATTER, MARKDOWN } from './consts';
+import { Formatter, Preamble, CONSTS_FORMATTER, MARKDOWN as M } from './consts';
 import { PROGRESS_BAR_FORMATTER } from './progress-bar.js';
+
+// variables to style
+const i2 = M.identation.repeat(2);
+const i4 = M.identation.repeat(4);
 
 export const FORMATTER =
 (formatter: Formatter): string => {
@@ -11,14 +15,6 @@ export const FORMATTER =
 	const preambleItemDone: number = (formatter.preamble && formatter.preamble.filter((insidePreamble: Preamble) => insidePreamble.status).length) || 0;
 	const progressValue: number = Math.round((preambleItemDone * 100) / preambleItem);
 
-	// variables to style
-	const identation2 = MARKDOWN.identation.repeat(2);
-	const identation4 = MARKDOWN.identation.repeat(2);
-	const breakLine = MARKDOWN.breakLine;
-	const item = MARKDOWN.item;
-	const preambleDone = MARKDOWN.preambleDone;
-	const preambleOpen = MARKDOWN.preambleOpen;
-
 	const id: string = formatter.id ? `${formatter.id} | ` : '';
 	const description: string = formatter.description;
 	const status: string = CONSTS_FORMATTER(formatter.status, 'STATUS');
@@ -26,28 +22,29 @@ export const FORMATTER =
 	const components: string = CONSTS_FORMATTER(formatter.components, 'COMPONENTES', true);
 	const publicationVersion: string = CONSTS_FORMATTER(formatter.publicationVersion, 'VERSÃO', true);
 	const progress: string = PROGRESS_BAR_FORMATTER(progressValue);
+
 	const preamble: string = formatter.preamble && formatter.preamble.length > 0
 	? formatter.preamble.map(
 		(insidePreamble: Preamble) => {
-			const readyPreamble = `${identation4}${item} ${insidePreamble.description} | ${insidePreamble.status ? preambleDone : preambleOpen}`;
-			const bolder = insidePreamble.accent ? MARKDOWN.bold : '';
-			return `${bolder}${readyPreamble}${bolder}${breakLine}`;
+			// const item = insidePreamble.accent ? M.preambleDoneAccent : (insidePreamble.status ? M.preambleOpen : M.preambleOpen);
+			const item = insidePreamble.status ? M.preambleDone : M.preambleOpen;
+			const accent = insidePreamble.accent ? M.bold : '';
+			return `${i4}${accent}${item} | ${insidePreamble.description}${accent}`;
 		}
-	).join('')
+	).join(M.breakLine) + M.breakLine
 	: '';
+
 	const obstacle: string = formatter.obstacle && formatter.obstacle.length > 0
-	? (
-		`! IMPEDIMENTOS:${breakLine}${formatter.obstacle.map(
-			(insideObstacle: string) => `${identation4}${item} ${insideObstacle}${breakLine}`
-		).join('')}`
-	)
-	: `Sem impedimentos`;
+	? `${i2}${M.obstacle} IMPEDIMENTOS:${M.breakLine}${formatter.obstacle.map(
+		(insideObstacle: string) => `${i4}${M.item} ${insideObstacle}`
+	).join(M.breakLine)}` + M.breakLine
+	: '';
 
 	return (
-		`${MARKDOWN.bold}${id}${description}${MARKDOWN.bold}${breakLine}` +
-		`${identation2}${status}${type}${components}${publicationVersion}${breakLine}` +
-		`${identation2}${progress}${breakLine}` +
-		`${preamble}${breakLine}` +
-		`${identation2}${obstacle}${breakLine}`
+		`${M.bold}${id}${description}${M.bold}${M.breakLine}` +
+		`${i2}${status}${type}${components}${publicationVersion}${M.breakLine}` +
+		`${i2}${progress}${M.breakLine}` +
+		`${preamble}` +
+		`${obstacle}`
 	);
 };

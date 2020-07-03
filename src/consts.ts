@@ -7,8 +7,13 @@ export const MARKDOWN = {
 	identation: ' ',
 	item: '+',
 	breakLine: '\n',
+	preambleDoneAccent: 'V',
 	preambleDone: 'V',
 	preambleOpen: 'X',
+	// preambleDoneAccent: ':white_check_mark:',
+	// preambleDone: ':ballot_box_with_check:',
+	// preambleOpen: ':no_entry:',
+	obstacle: ':warning:',
 };
 
 export const CODE_PREFIX = {
